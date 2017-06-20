@@ -1,0 +1,89 @@
+// ------------
+// 브레이크포인트
+// ------------
+
+// 데스크탑 태블릿 분기 지점
+$bp-wide: 1260px !default;
+
+// 모바일 분기 지점
+$bp-small: 768px !default;
+
+/// 데스크탑만 해당하는 코드 작성
+/// @group breakpoint
+/// @example scss - scss
+///   @include only-desktop {
+///     .contents { 
+///       width: 1260px;
+///     }
+///   }
+/// @example css - css output
+///   @media screen and (min-width: 1260px) {
+///     .contents {
+///       width: 1260px;
+///     }
+///   }
+@mixin only-desktop($bp-desktop: $bp-wide) {
+  @media screen and (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+/// 태블릿만 해당하는 코드 작성
+/// @group breakpoint
+/// @example scss - scss
+///   @include only-tablet {
+///     .contents { 
+///       width: auto;
+///     }
+///   }
+/// @example css - css output
+///   @media screen and (min-width: 768px) and (max-width: 1259px) {
+///     .contents {
+///       width: auto;
+///     }
+///   }
+@mixin only-tablet($bp-tablet: $bp-small ((parseInt($bp-wide) - 1) * 1px)) {
+  @media screen and (min-width: nth($bp-tablet, 1)) and (max-width: nth($bp-tablet, 2)) {
+    @content;
+  }
+}
+
+/// 모바일만 해당하는 코드 작성
+/// @group breakpoint
+/// @example scss - scss
+///   @include only-mobile {
+///     .contents { 
+///       width: auto;
+///     }
+///   }
+/// @example css - css output
+///   @media screen and (max-width: 767px) {
+///     .contents {
+///       width: auto;
+///     }
+///   }
+@mixin only-mobile($bp-mobile: ((parseInt($bp-small) - 1) * 1px)) {
+  @media screen and (max-width: $bp-mobile) {
+    @content;
+  }
+}
+
+/// 태블릿과 모바일 공통 코드 작성
+/// @group breakpoint
+/// @example scss - scss
+///   @include only-no-desktop {
+///     .contents { 
+///       width: auto;
+///     }
+///   }
+/// @example css - css output
+///   @media screen and (max-width: 1259px) {
+///     .contents {
+///       width: auto;
+///     }
+///   }
+@mixin only-no-desktop($bp-tablet-mobile: ((parseInt($bp-wide) - 1) * 1px)) {
+  @media screen and (max-width: $bp-tablet-mobile) {
+    @content;
+  }
+}

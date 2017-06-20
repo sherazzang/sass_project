@@ -1,0 +1,61 @@
+@import '../../sass/test';
+
+/**
+ * thumbnail-grid-list 믹스인 테스트
+ * --------------------------------
+ */
+
+.thumbnail-4-list {
+
+	// 속기형
+	// @include thumbnail-grid-list( 4, 1200px, 12, 0.25, 30px, true, 'thumbnail-4-list__photo', 'blur', float);
+	@include only-desktop {
+		margin-top: 50px;	
+		@include thumbnail-grid-list(
+			$thumb-grid-list: 4,
+			$thumb-grid-container: 1200px, 
+			$thumb-grid-columns: 12, 	  
+			$thumb-grid-gutters: 0.25, 
+			$thumb-grid-bottom-gutters: 30px, 
+			$thumb-grid-output: float,
+			$thumb-grid-effect-target: '.thumbnail-4-list__photo',
+			$thumb-grid-effect-name: 'blur',
+			$thumb-grid-query-fallback: true
+		);
+	}
+	@include only-tablet {
+		margin-top: 30px;
+		@include thumbnail-grid-list(
+			$thumb-grid-list: 3
+		);
+	}
+	@include only-mobile {
+		margin-top: 20px;
+		@include thumbnail-grid-list(
+			$thumb-grid-list: 2,
+			$thumb-grid-bottom-gutters: 20px
+		);
+	}
+}
+.thumbnail-4-list__txt-box {
+	.title {
+		margin-top: 10px;
+    	font-size: rem(16px);
+    	line-height: rem(24px);
+	}
+	.txt {
+		margin-top: 5px;	
+    	font-size: rem(12px);
+    	line-height: rem(24px);
+    	color: rgb(153, 153, 153);
+	}
+}
+
+.insta-list {
+	@include only-desktop {
+		@include thumbnail-grid-list(5, 1200px, 10, 0, 0, a, 'blur', true);
+	}
+	@include only-no-desktop{
+		@include thumbnail-grid-list( 3, auto, 9, 0, 0);
+	}
+}
